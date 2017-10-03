@@ -41,22 +41,36 @@ class FileStoreStorageBackend(models.Model):
             raise AccessError(_("Access to %s is forbidden" % full_path))
         return full_path
 
-    def _filestore_store_data(self, name, datas, is_public=False):
+    def _filestore_store(self, name, datas, is_public=False, **kwargs):
+        return self._filestore_store_raw(name,
+            base64.b64decode(datas), is_public, **kwargs
+        )
+
+    def _filestore_store_raw(self, name, datas, is_public=False, erase_file=False):
         full_path = self._fullpath(name)
+        logger.debug('Backend Storage: Write file %s to filestore', full_path)
         dirname = os.path.dirname(full_path)
         if not os.path.isdir(dirname):
             os.makedirs(dirname)
-        logger.debug('Backend Storage: Write file %s to filestore', full_path)
-        with open(full_path, "wb") as my_file:
+
+        if not erase_file and os.path.isfile(full_path):
+            # python 3: mode = erase_file and  "wb" or "xb"
+            raise AccessError(_('File already exists'))
+        with open(full_path, 'wb') as my_file:  
             my_file.write(datas)
         return name
 
     def _filestore_get_public_url(self, name):
         return os.path.join(self.filestore_public_base_url, name)
 
-    def _filestore_retrieve_data(self, name):
+    def _filestore_retrieve(self, name):
+        return base64.b64encode(
+            self._filestore_retrieve_raw(name)
+        )
+
+    def _filestore_retrieve_raw(self, name):
         logger.debug('Backend Storage: Read file %s from filestore', name)
         full_path = self._fullpath(name)
         with open(full_path, "rb") as my_file:
             datas = my_file.read()
-        return datas and base64.b64encode(datas) or False
+        return datas

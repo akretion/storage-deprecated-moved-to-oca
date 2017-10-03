@@ -29,21 +29,29 @@ class StorageBackend(models.Model):
 
     name = fields.Char(required=True)
     backend_type = fields.Selection([], required=True)  # added by subclasses
-    public_base_url = fields.Char()
-
-    def store(self, name, datas, is_base64=True, **kwargs):
-        if is_base64:
-            datas = base64.b64decode(datas)
-        return self.store_data(name, datas, **kwargs)
+    public_base_url = fields.Char() # TODO: useless ?
 
     @implemented_by_factory
-    def store_data(self, name, datas, **kwargs):
+    def store(self, name, datas, **kwargs):
+        """Store data base64 encoded.
+
+        @param name: name of the file
+        @param datas: payload (can be of any type)
+        @param kwargs: additionnal stuff for specific implementations
+        @return private path of the stored file
+        """
+        pass
+
+    @implemented_by_factory
+    def retrieve(self, name, **kwargs):
+        """Retrieve data base64 encoded
+
+        @param name: name of the file
+        @param kwargs: additionnal stuff for specific implementations
+        @return data base64 encoded
+        """
         pass
 
     @implemented_by_factory
     def get_public_url(self, name, **kwargs):
-        pass
-
-    @implemented_by_factory
-    def retrieve_data(self, name, **kwargs):
         pass
