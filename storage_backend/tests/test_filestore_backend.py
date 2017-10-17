@@ -77,10 +77,9 @@ class TestFSBackend(TransactionCase):
             self.assertTrue(True)
 
         print backend._fullpath('../../../outside')
-        self.assertTrue(
-            backend
-                ._fullpath('../../../outside')
-                .endswith('storage/test_fs_dir/outside')
+        try:
+            backend._fullpath('../../../outside')
+            .endswith('storage/test_fs_dir/outside')
             , 'it should survive basic escape ../../'
         )
 
