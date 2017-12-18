@@ -114,3 +114,8 @@ class StorageImage(models.Model):
             thumbnail = self.env['storage.thumbnail']._create_thumbnail(
                 self, size_x, size_y)
         return thumbnail
+
+    @api.model
+    def _in_cache_without(self, field, limit=1):
+        # avoid prefetching image to avoid useless read of remote data
+        return super(StorageImage, self)._in_cache_without(field, limit=limit)
