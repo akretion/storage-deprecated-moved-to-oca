@@ -100,12 +100,17 @@ class StorageFile(models.Model):
             'private_path': private_path
             }
 
+    def _prepare_file_name(self):
+        self.ensure_one()
+        filename, extension = os.path.splitext(self.name)
+        return "%s-%s%s" %(filename, self.id, extension)
+
     @api.multi
     def _inverse_datas(self):
         for record in self:
             b_decoded = base64.b64decode(record.datas)
             private_path = self.backend_id.sudo().store(
-                record.name,
+                record._prepare_file_name(),
                 b_decoded,
                 is_public=True,
                 is_base64=False)
