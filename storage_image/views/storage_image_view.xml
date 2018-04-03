@@ -25,11 +25,25 @@
                            nolabel="1"
                            options="{'size':(128,128)}"/>
                 </group>
-                <group string="Name">
-                    <field name="name" />
-                    <field name="alt_name" />
-                </group>
-                <field name="res_model" invisible="True" />
+                <notebook>
+                    <page string="File">
+                        <group string="Name">
+                            <field name="name" />
+                            <field name="alt_name" />
+                        </group>
+                        <group string="File">
+                            <field name="url" widget="url"/>
+                            <field name="human_file_size"/>
+                            <field name="checksum"/>
+                            <field name="private_path"/>
+                        </group>
+                        <group string="Technical">
+                            <field name="backend_id"/>
+                            <field name="res_model" readonly="True"/>
+                            <field name="res_id" readonly="True"/>
+                        </group>
+                    </page>
+                </notebook>
             </form>
         </field>
     </record>
@@ -38,17 +52,14 @@
     <record id="storage_image_view_kanban" model="ir.ui.view">
         <field name="model">storage.image</field>
         <field name="arch" type="xml">
-            <kanban delete="true">
+            <kanban>
                 <field name="name" />
                 <field name="alt_name" />
                 <field name="image_small_url" />
-                <field name="sequence"/>
+                <field name="sequence" />
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_vignette oe_semantic_html_override">
-                            <div class="oe_edit_only oe_right">
-                                <a type="delete" class="oe_e">[</a>
-                            </div>
                             <a type="open">
                                 <img t-att-src="record.image_small_url.value"
                                      class="oe_kanban_image"/>
@@ -82,7 +93,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">storage.image</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="search_view_id" ref="storage_image_view_search"/>
         <field name="domain">[]</field>
         <field name="context">{}</field>

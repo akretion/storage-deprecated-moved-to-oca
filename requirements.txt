@@ -1,2 +1,4 @@
 boto
 paramiko
+slugify
+cerberus
