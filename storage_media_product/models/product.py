@@ -64,7 +64,7 @@ class ProductMediaRelation(models.Model):
     @api.depends("media_id", "product_tmpl_id.attribute_line_ids.value_ids")
     def _compute_available_attribute(self):
         # the depend on 'media_id' only added for triggering the onchange
-        for record in self:
-            record.available_attribute_value_ids = record.product_tmpl_id.mapped(
+        for rec in self:
+            rec.available_attribute_value_ids = rec.product_tmpl_id.mapped(
                 "attribute_line_ids.value_ids"
             )

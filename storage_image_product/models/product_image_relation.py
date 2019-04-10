@@ -40,7 +40,7 @@ class ProductImageRelation(models.Model):
     @api.depends("image_id", "product_tmpl_id.attribute_line_ids.value_ids")
     def _compute_available_attribute(self):
         # the depend on 'image_id' only added for triggering the onchange
-        for record in self:
-            record.available_attribute_value_ids = record.product_tmpl_id.mapped(
+        for rec in self:
+            rec.available_attribute_value_ids = rec.product_tmpl_id.mapped(
                 "attribute_line_ids.value_ids"
             )
