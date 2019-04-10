@@ -69,7 +69,7 @@ class SftpStorageBackend(Component):
             if dirname:
                 try:
                     client.stat(dirname)
-                except IOError, e:
+                except IOError as e:
                     if e.errno == errno.ENOENT:
                         sftp_mkdirs(client, dirname)
                     else:
@@ -90,7 +90,7 @@ class SftpStorageBackend(Component):
         with sftp(self.collection) as client:
             try:
                 return client.listdir(full_path)
-            except IOError, e:
+            except IOError as e:
                 if e.errno == errno.ENOENT:
                     # The path do not exist return an empty list
                     return []
