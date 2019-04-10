@@ -1,4 +1,4 @@
-/* Copyright (C) 2018-Today Akretion (https://www.akretion.com) 
+/* Copyright (C) 2018-Today Akretion (https://www.akretion.com)
     @author Pierrick Brun
     @author Sebastien Beau
     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
@@ -6,12 +6,12 @@
 
 odoo.define("storage_image_product.pos_product", function(require){
     "use strict";
-    
+
     var screens = require("point_of_sale.screens");
     var models = require('point_of_sale.models');
     /* ********************************************************
     Overload: point_of_sale.ProductListWidget
-    
+
     - The overload will:
     - display product custom storage image;
     *********************************************************** */
