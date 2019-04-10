@@ -15,7 +15,7 @@ odoo.define('storage_image.image_url', function (require) {
                 url = 'data:image/png;base64,' + url;
             }
             var $img = $(QWeb.render("FieldBinaryImage-img", {
-                widget: this, url: url
+                widget: this, url: url,
             }));
             $img.click(function (e) {
                 if (self.view.get("actual_mode") === "view") {

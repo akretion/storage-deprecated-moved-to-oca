@@ -130,9 +130,8 @@ class StorageFileCase(TransactionComponentCase):
         # Public user used on the controller when authentication is 'public'
         public_user = self.env.ref("base.public_user")
         env = self.env(user=public_user)
-        storage_file_public = env[storage_file._name].browse(storage_file.ids)
         with self.assertRaises(AccessError):
-            storage_file_public.name
+            env[storage_file._name].browse(storage_file.ids).name
         return True
 
     def test_public_access2(self):

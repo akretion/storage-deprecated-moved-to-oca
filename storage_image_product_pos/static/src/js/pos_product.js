@@ -37,5 +37,6 @@ odoo.define("storage_image_product.pos_product", function (require) {
                 model.fields.push('image_medium_url');
             }
         }
+        return false;
     });
 });
