@@ -14,8 +14,10 @@ odoo.define('storage_image.image_url', function (require) {
             } else if (!url.startsWith('http')) {
                 url = 'data:image/png;base64,' + url;
             }
-            var $img = $(QWeb.render("FieldBinaryImage-img", {widget: this, url: url}));
-            $img.click(function(e) {
+            var $img = $(QWeb.render("FieldBinaryImage-img", {
+                widget: this, url: url
+            }));
+            $img.click(function (e) {
                 if (self.view.get("actual_mode") === "view") {
                     var $button = $(".o_form_button_edit");
                     $button.openerpBounce();
@@ -33,7 +35,10 @@ odoo.define('storage_image.image_url', function (require) {
             $img.on('error', function () {
                 self.on_clear();
                 $img.attr('src', self.placeholder);
-                self.do_warn(_t("Image"), _t("Could not display the selected image."));
+                self.do_warn(
+                    _t("Image"),
+                    _t("Could not display the selected image.")
+                );
             });
         },
     });
