@@ -14,17 +14,18 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
 
-stages:
-  - linting
-  - test
-
-jobs:
-  include:
-    - stage: linting
-      name: "Pre-Commit"
-      python: 3.6
-      install: pip install pre_commit
-      script: pre-commit run --all
+# TODO we should fix the issue with lxml
+#stages:
+#  - linting
+#  - test
+#
+#jobs:
+#  include:
+#    - stage: linting
+#      name: "Pre-Commit"
+#      python: 3.6
+#      install: pip install pre_commit
+#      script: pre-commit run --all
 
 env:
   global:
