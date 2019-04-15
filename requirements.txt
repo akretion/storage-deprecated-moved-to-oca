@@ -1,5 +1,5 @@
 paramiko
-slugify
+python-slugify
 vcrpy
 cerberus
 vcrpy-unittest

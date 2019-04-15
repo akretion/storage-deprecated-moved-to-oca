@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,7 +6,7 @@ import base64
 import os
 
 import requests_mock
-import urlparse
+import urllib.parse
 from odoo.addons.component.tests.common import TransactionComponentCase
 from odoo.exceptions import AccessError
 
@@ -28,11 +27,11 @@ class StorageImageCase(TransactionComponentCase):
 
         self.backend = self.env.ref("storage_backend.default_storage_backend")
         path = os.path.dirname(os.path.abspath(__file__))
-        f = open(os.path.join(path, "static/akretion-logo.png"))
-        data = f.read()
-        self.filesize = len(data)
-        self.filedata = base64.b64encode(data)
-        self.filename = "akretion-logo.png"
+        with open(os.path.join(path, "static/akretion-logo.png"), 'rb') as f:
+            data = f.read()
+            self.filesize = len(data)
+            self.filedata = base64.b64encode(data)
+            self.filename = "akretion-logo.png"
 
     def _create_storage_image(self):
         return self.env["storage.image"].create(
@@ -50,10 +49,10 @@ class StorageImageCase(TransactionComponentCase):
     def test_create_and_read_image(self):
         image = self._create_storage_image()
         self.assertEqual(image.data, self.filedata)
-        self.assertEqual(image.mimetype, u"image/png")
-        self.assertEqual(image.extension, u".png")
-        self.assertEqual(image.filename, u"akretion-logo")
-        url = urlparse.urlparse(image.url)
+        self.assertEqual(image.mimetype, "image/png")
+        self.assertEqual(image.extension, ".png")
+        self.assertEqual(image.filename, "akretion-logo")
+        url = urllib.parse.urlparse(image.url)
         self.assertEqual(
             url.path, "/web/content/storage.file/%s/data" % image.file_id.id
         )
@@ -69,23 +68,23 @@ class StorageImageCase(TransactionComponentCase):
     def test_create_specific_thumbnail(self):
         image = self._create_storage_image()
         thumbnail = image.get_or_create_thumbnail(
-            100, 100, u"my-image-thumbnail"
+            100, 100, "my-image-thumbnail"
         )
-        self.assertEqual(thumbnail.url_key, u"my-image-thumbnail")
+        self.assertEqual(thumbnail.url_key, "my-image-thumbnail")
         self.assertEqual(
-            thumbnail.relative_path[0:26], u"my-image-thumbnail_100_100"
+            thumbnail.relative_path[0:26], "my-image-thumbnail-100-100"
         )
 
         # Check that method will return the same thumbnail
         # Check also that url_key have been slugified
         new_thumbnail = image.get_or_create_thumbnail(
-            100, 100, u"My Image Thumbnail"
+            100, 100, "My Image Thumbnail"
         )
         self.assertEqual(new_thumbnail.id, thumbnail.id)
 
         # Check that method will return a new thumbnail
         new_thumbnail = image.get_or_create_thumbnail(
-            100, 100, u"My New Image Thumbnail"
+            100, 100, "My New Image Thumbnail"
         )
         self.assertNotEqual(new_thumbnail.id, thumbnail.id)
 
@@ -94,8 +93,8 @@ class StorageImageCase(TransactionComponentCase):
             {"name": "Test-of image_name.png"}
         )
         image.onchange_name()
-        self.assertEqual(image.name, u"test-of-image_name.png")
-        self.assertEqual(image.alt_name, u"Test of image name")
+        self.assertEqual(image.name, "test-of-image-name.png")
+        self.assertEqual(image.alt_name, "Test of image name")
 
     def test_unlink(self):
         image = self._create_storage_image()
@@ -131,7 +130,7 @@ class StorageImageCase(TransactionComponentCase):
         backend.served_by = "external"
         backend.base_url = "test"
         with requests_mock.mock() as m:
-            m.get("http://pilbox:8888?", text="data")
+            m.get("http://pilbox:8888", text="data")
             image = self._create_storage_image()
             self.assertEqual(len(m.request_history), 2)
             self.assertEqual(

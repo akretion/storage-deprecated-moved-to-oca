@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -110,8 +109,8 @@ class StorageFile(models.Model):
         if strategy == "hash":
             return checksum[:2] + "/" + checksum
         elif strategy == "name_with_id":
-            return u"{}{}".format(
-                slugify(u"{}-{}".format(self.filename, self.id)),
+            return "{}{}".format(
+                slugify("{}-{}".format(self.filename, self.id)),
                 self.extension,
             )
 

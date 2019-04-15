@@ -2,138 +2,40 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855]
-      X-Amz-Date: [20190411T090835Z]
-    method: !!python/unicode 'GET'
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS43Ljg0IFB5dGhvbi8zLjUuMyBMaW51eC80LjQuMC0xNDUtZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjEwLjg0IFJlc291cmNl
+      X-Amz-Content-SHA256:
+      - !!binary |
+        ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3
+        ODUyYjg1NQ==
+      X-Amz-Date:
+      - !!binary |
+        MjAxOTA0MTJUMjExODAyWg==
+    method: GET
     uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/?prefix=subdirectory%2Fhere&encoding-type=url
   response:
-    body: {string: !!python/unicode '<?xml version="1.0" encoding="UTF-8"?>
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
 
-        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>ak-testing-bucket</Name><Prefix>subdirectory/here</Prefix><Marker></Marker><MaxKeys>1000</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated></ListBucketResult>'}
+        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>ak-testing-bucket</Name><Prefix>subdirectory/here</Prefix><Marker></Marker><MaxKeys>1000</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated></ListBucketResult>'
     headers:
-      content-type: [application/xml]
-      date: ['Thu, 11 Apr 2019 09:08:36 GMT']
-      server: [AmazonS3]
-      transfer-encoding: [chunked]
-      x-amz-bucket-region: [eu-west-3]
-      x-amz-id-2: [uOcZsX6vGGhmm5ph4OyyPk5kU0k+cMw9b5wOoFf/NpQS6txp1gif3d4qlzYWhTaa/HJzDA478+s=]
-      x-amz-request-id: [7E88BABE8B63A735]
-    status: {code: 200, message: OK}
-- request:
-    body: !!python/object:StringIO.StringIO
-      buf: This is a simple file
-      buflist: []
-      closed: false
-      len: 21
-      pos: 0
-      softspace: 0
-    headers:
-      Cache-Control: ['max-age=31536000, public']
-      Content-Length: ['21']
-      Content-MD5: [GQqjEXsRqrPyxfTl99nkAg==]
-      Content-Type: [text/plain]
-      Expect: [100-continue]
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [UNSIGNED-PAYLOAD]
-      X-Amz-Date: [20190411T090835Z]
-    method: !!python/unicode 'PUT'
-    uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/subdirectory/here/test_file.txt
-  response:
-    body: {string: !!python/unicode ''}
-    headers:
-      content-length: ['0']
-      date: ['Thu, 11 Apr 2019 09:08:36 GMT']
-      etag: ['"190aa3117b11aab3f2c5f4e5f7d9e402"']
-      server: [AmazonS3]
-      x-amz-id-2: [RgrsKLomTM+PxVh6V+IALMJNDJJusAreLZJRAU79416+8tkeSuFr8/ZlpEzb4yA908GylswaAWI=]
-      x-amz-request-id: [E3C4CE305C22AD60]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855]
-      X-Amz-Date: [20190411T090835Z]
-    method: !!python/unicode 'GET'
-    uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/?prefix=subdirectory%2Fhere&encoding-type=url
-  response:
-    body: {string: !!python/unicode '<?xml version="1.0" encoding="UTF-8"?>
-
-        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>ak-testing-bucket</Name><Prefix>subdirectory/here</Prefix><Marker></Marker><MaxKeys>1000</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated><Contents><Key>subdirectory/here/test_file.txt</Key><LastModified>2019-04-11T09:08:36.000Z</LastModified><ETag>&quot;190aa3117b11aab3f2c5f4e5f7d9e402&quot;</ETag><Size>21</Size><Owner><ID>5710f4d93f4553b9993fadcaf0462bc22323402d134a01ad84baeb725fc66d29</ID></Owner><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>'}
-    headers:
-      content-type: [application/xml]
-      date: ['Thu, 11 Apr 2019 09:08:36 GMT']
-      server: [AmazonS3]
-      transfer-encoding: [chunked]
-      x-amz-bucket-region: [eu-west-3]
-      x-amz-id-2: [GjT2YOaLPuyXaSQLYgk5g8qINjleihd6bXh3YYtblu4pl/N8DJxHqfBolkpOUpR4hbPSW7+pLOU=]
-      x-amz-request-id: [65E6B5353DC93DD8]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855]
-      X-Amz-Date: [20190411T090836Z]
-    method: !!python/unicode 'GET'
-    uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/subdirectory/here/test_file.txt
-  response:
-    body: {string: !!python/unicode 'This is a simple file'}
-    headers:
-      accept-ranges: [bytes]
-      cache-control: ['max-age=31536000, public']
-      content-length: ['21']
-      content-type: [text/plain]
-      date: ['Thu, 11 Apr 2019 09:08:37 GMT']
-      etag: ['"190aa3117b11aab3f2c5f4e5f7d9e402"']
-      last-modified: ['Thu, 11 Apr 2019 09:08:36 GMT']
-      server: [AmazonS3]
-      x-amz-id-2: [lT9X9Z4ffcu6vYHA9WMqA05ykqvM5jS0r9AggiZMEoQIWj8OoYU3IYAJbREnzqP41ejsVyIwox8=]
-      x-amz-request-id: [3710816CDEE29024]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Content-Length: ['0']
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855]
-      X-Amz-Date: [20190411T090836Z]
-    method: !!python/unicode 'DELETE'
-    uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/subdirectory/here/test_file.txt
-  response:
-    body: {string: !!python/unicode ''}
-    headers:
-      date: ['Thu, 11 Apr 2019 09:08:37 GMT']
-      server: [AmazonS3]
-      x-amz-id-2: [MABygkjKt8QMBuXMwORdi628qMOQm5FflSYYQZPWH+pq9tZWAf+/ZlA/43mgUbR39Rbw/GQdj7Y=]
-      x-amz-request-id: [B4204D35B2E70AE2]
-    status: {code: 204, message: No Content}
-- request:
-    body: null
-    headers:
-      User-Agent: [Boto3/1.7.40 Python/2.7.9 Linux/4.15.0-47-generic Botocore/1.10.40
-          Resource]
-      X-Amz-Content-SHA256: [e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855]
-      X-Amz-Date: [20190411T090836Z]
-    method: !!python/unicode 'GET'
-    uri: https://ak-testing-bucket.s3.eu-west-3.amazonaws.com/?prefix=subdirectory%2Fhere&encoding-type=url
-  response:
-    body: {string: !!python/unicode '<?xml version="1.0" encoding="UTF-8"?>
-
-        <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>ak-testing-bucket</Name><Prefix>subdirectory/here</Prefix><Marker></Marker><MaxKeys>1000</MaxKeys><EncodingType>url</EncodingType><IsTruncated>false</IsTruncated></ListBucketResult>'}
-    headers:
-      content-type: [application/xml]
-      date: ['Thu, 11 Apr 2019 09:08:38 GMT']
-      server: [AmazonS3]
-      transfer-encoding: [chunked]
-      x-amz-bucket-region: [eu-west-3]
-      x-amz-id-2: [06hz7LdPR6Z6AO1qPHd231p6OUTHhxvE6s8iRiG8rkhuVi1mw2sRRvdM7q1ZPUnSfXrmQh9CJfY=]
-      x-amz-request-id: [B6ABFF59DC945A6E]
-    status: {code: 200, message: OK}
+      Content-Type:
+      - application/xml
+      Date:
+      - Fri, 12 Apr 2019 21:18:05 GMT
+      Server:
+      - AmazonS3
+      Transfer-Encoding:
+      - chunked
+      x-amz-bucket-region:
+      - eu-west-3
+      x-amz-id-2:
+      - 2UjznrUICnOQo093MRby4hedhjW2ukXpNZKjKIa0Rf8EEF1QW0lSjBp57M4SZCR2fyCVYbzpIIo=
+      x-amz-request-id:
+      - 2BC42EDEF37FFAE8
+    status:
+      code: 200
+      message: OK
 version: 1

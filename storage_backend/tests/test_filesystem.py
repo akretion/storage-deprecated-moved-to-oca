@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -21,7 +20,7 @@ class FileSystemDemoUserAccessCase(Common):
     def test_cannot_add_file(self):
         with self.assertRaises(AccessError):
             self.backend._add_b64_data(
-                self.filename, self.filedata, mimetype=u"text/plain"
+                self.filename, self.filedata, mimetype="text/plain"
             )
 
     def test_cannot_list_file(self):

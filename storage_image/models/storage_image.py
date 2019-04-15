@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -58,7 +57,7 @@ class StorageImage(models.Model):
         Overload this method if you need something more powerfull
         """
         return int(
-            self.env["ir.config_parameter"].get_param(
+            self.env["ir.config_parameter"].sudo().get_param(
                 "storage.image.backend_id"
             )
         )

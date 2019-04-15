@@ -3,8 +3,9 @@ odoo.define('storage_image.image_url', function (require) {
     var core = require('web.core');
     var _t = core._t;
     var QWeb = core.qweb;
+    var field_registry = require('web.field_registry');
 
-    var FieldBinaryImage = core.form_widget_registry.map.image;
+    var FieldBinaryImage = require('web.basic_fields').FieldBinaryImage;
     var FieldImageUrl = FieldBinaryImage.extend({
         render_value: function () {
             var self = this;
@@ -42,6 +43,6 @@ odoo.define('storage_image.image_url', function (require) {
             });
         },
     });
-    core.form_widget_registry.add('image_url', FieldImageUrl);
+    field_registry.add('image_url', FieldImageUrl);
     return FieldImageUrl;
 });

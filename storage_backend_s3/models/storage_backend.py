@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Akretion (http://www.akretion.com).
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -28,10 +27,21 @@ class StorageBackend(models.Model):
     backend_type = fields.Selection(selection_add=[("amazon_s3", "Amazon S3")])
     aws_bucket = fields.Char(sparse="data", string="Bucket")
     aws_access_key_id = fields.Char(sparse="data", string="Access Key ID")
-    aws_secret_access_key = fields.Char(
-        related="password", string="Secret Access Key"
-    )
+    aws_secret_access_key = fields.Char(string="Secret Access Key")
     aws_region = fields.Selection(
         selection=_get_aws_region, sparse="data", string="Region"
     )
     aws_cache_control = fields.Char(default="max-age=31536000, public")
+
+    @property
+    def _server_env_fields(self):
+        base_fields = super()._server_env_fields
+        s3_fields = {
+            "aws_bucket": {},
+            "aws_access_key_id": {},
+            "aws_secret_access_key": {},
+            "aws_region": {},
+            "aws_cache_control": {}
+        }
+        s3_fields.update(base_fields)
+        return s3_fields
