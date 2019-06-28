@@ -151,6 +151,12 @@ class StorageFile(models.Model):
     )
     def _compute_url(self):
         for record in self:
+            if not record.relative_path:
+                # We have 2 compute fields data and url
+                # Odoo can compute this field before data field
+                # and in this case relative_path is empty
+                # we just need to skip this call
+                continue
             if record.backend_id.served_by == "odoo":
                 base_url = (
                     self.env["ir.config_parameter"]
