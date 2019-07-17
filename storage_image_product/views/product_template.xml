@@ -12,6 +12,12 @@
             </field>
             <xpath expr="//page[@name='sales']" position="after">
                 <page name="image" string="Image">
+                    <div>
+                   <button name="button_product2storage"
+                            string="Mass link" type="object"
+                            help="Massively add images by selected them in batch"
+                            context="{'dest_model': 'storage.image', 'default_product_tmpl_id': active_id}"/>
+                    </div>
                     <field name="image_ids" mode="tree" />
                 </page>
             </xpath>
@@ -31,6 +37,29 @@
                 <img t-att-src="record.image_small_url.value"/>
             </xpath>
         </field>
+    </record>
+
+    <record id="action_link_img2product" model="ir.actions.server">
+        <field name="name">Link images to product 🔗</field>
+        <field name="state">code</field>
+        <field name="context">{'default_product_tmpl_id': default_product_tmpl_id}</field>
+        <field name="model_id" ref="storage_image.model_storage_image"/>
+        <field name="code">
+records._link2product()
+        </field>
+    </record>
+
+    <record id="action_link_img2product_value" model="ir.values">
+        <field name="model_id" ref="storage_image.model_storage_image" />
+        <field name="name">Link images to product 🔗</field>
+        <field name="key2">client_action_multi</field>
+        <field name="key">action</field>
+        <field name="model">storage.image</field>
+        <field name="value" eval="'ir.actions.server,' + str(ref('storage_image_product.action_link_img2product'))" />
+    </record>
+
+    <record id="action_link_img2product" model="ir.actions.server">
+        <field name="menu_ir_values_id" ref="action_link_img2product_value"/>
     </record>
 
 </odoo>

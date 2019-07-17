@@ -20,7 +20,7 @@ except ImportError:  # pragma: no cover
 class StorageImage(models.Model):
     _name = "storage.image"
     _description = "Storage Image"
-    _inherit = "thumbnail.mixin"
+    _inherit = ["thumbnail.mixin", "storage.file.mixin"]
     _inherits = {"storage.file": "file_id"}
 
     alt_name = fields.Char(string="Alt Image name")

@@ -12,7 +12,8 @@ _logger = logging.getLogger(__name__)
 
 
 class ProductTemplate(models.Model):
-    _inherit = "product.template"
+    _name = "product.template"
+    _inherit = ["product.template", "storage.file.product.mixin"]
 
     # small and medium image are here to replace
     # native image field on form and kanban
