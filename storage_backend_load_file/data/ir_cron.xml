@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="launch_storage_backend_file_import" model="ir.cron">
+        <field name="name">Storage backend - Import files</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall" eval="-1"/>
+        <field name="doall" eval="False"/>
+        <field name="model">storage.backend</field>
+        <field name="function">launch_auto_load_content</field>
+        <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 22:00:00')"/>
+        <field name="args" eval="([])"/>
+    </record>
+
+    <record id="launch_storage_backend_purge" model="ir.cron">
+        <field name="name">Storage backend - Purge old files</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall" eval="-1"/>
+        <field name="doall" eval="False"/>
+        <field name="model">storage.backend</field>
+        <field name="function">launch_purge</field>
+        <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 23:00:00')"/>
+        <field name="args" eval="([])"/>
+    </record>
+</odoo>
